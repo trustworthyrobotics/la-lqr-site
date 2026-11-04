@@ -137,7 +137,7 @@
           </p>
           <ol>
             <li><b>Project</b>: z<sub>s</sub> = P<sub>s</sub> x<sub>s</sub>, with D<sub>lat</sub> = 64 instead of D<sub>act</sub> &asymp; 10<sup>7</sup>–10<sup>8</sup></li>
-            <li><b>Linearize</b>: &delta;z<sub>s+1</sub> &asymp; &Atilde;<sub>s</sub>&delta;z<sub>s</sub> + &Btilde;<sub>s</sub>&delta;u<sub>s</sub> along a nominal trajectory</li>
+            <li><b>Linearize</b>: &delta;z<sub>s+1</sub> &asymp; A&#x303;<sub>s</sub>&delta;z<sub>s</sub> + B&#x303;<sub>s</sub>&delta;u<sub>s</sub> along a nominal trajectory</li>
             <li><b>Set a feature setpoint</b>: &beta;<sup>z,&#9733;</sup><sub>s</sub> = &lambda;&Vert;e<sup>z</sup><sub>s</sub>&Vert;</li>
             <li><b>Solve LQR</b> offline over all (timestep, layer) pairs &rarr; gains K<sub>s</sub></li>
             <li><b>Apply online</b>: u<sup>&#9733;</sup><sub>s</sub> = K<sub>s</sub>(&beta;<sup>z,&#9733;</sup><sub>s</sub> &minus; v<sup>z&top;</sup><sub>s</sub>z<sub>s</sub>)&nbsp;v<sup>z</sup><sub>s</sub></li>
