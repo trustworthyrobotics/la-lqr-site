@@ -401,3 +401,22 @@ footer a { color: var(--text-muted); }
   box-shadow: var(--shadow-card);
 }
 .video-card .reveal:hover { background: var(--warn-soft); }
+
+/* Reveal / blur-again controls */
+.video-card:not(.blurred) .reveal { display: none; }
+.video-card.blurred .reblur { display: none; }
+.video-card .reblur {
+  margin-left: auto;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.video-card .reblur:hover { border-color: var(--warn); color: var(--warn); }
+.blur-toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin: -8px 0 22px; }
+.blur-toolbar .copy-btn { margin-top: 0; }
+.warning-banner b { color: var(--warn); }

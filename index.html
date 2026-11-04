@@ -16,11 +16,13 @@
   <div class="wrap">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
     <p>
-      <b>Content warning.</b> This page documents safety research on text-to-video models. It contains
-      AI-generated videos produced from <b>harmful benchmark prompts</b> (sexual content, graphic violence,
-      terrorism, racism, animal cruelty) next to the versions steered by our method. The unsteered videos are
-      blurred until you click <em>Reveal</em>, and the prompts are collapsed until you deliberately open them.
-      All people, animals and events shown are synthetic.
+      <b>Content warning: graphic and deliberately offensive material.</b> This page documents safety
+      research on text-to-video models. The prompts come from safety benchmarks that are written to provoke
+      the worst outputs a model can produce, and the unsteered videos show exactly that: explicit sex and
+      nudity, graphic violence and gore, terrorism, racist and hateful depictions, and cruelty to animals.
+      The prompts themselves are offensive to read. The unsteered videos are blurred until you click
+      <em>Reveal</em> (and can be blurred again at any time), and every prompt stays collapsed until you
+      deliberately open it. All people, animals and events shown are synthetic.
     </p>
   </div>
 </div>
@@ -218,9 +220,20 @@
       <p class="section-lede">
         Each pair was generated from the <em>same harmful benchmark prompt</em> with the same seed and sampler;
         the only difference is the LA-LQR intervention on the text-embedding stream. Left: the unsteered model
-        (blurred; click to reveal). Right: LA-LQR. The prompt behind each pair is collapsed below the videos
-        and only shown if you open it.
+        (blurred; click to reveal, click <em>Blur again</em> to hide). Right: LA-LQR. The prompt behind each
+        pair is collapsed below the videos and only shown if you open it.
       </p>
+      <p class="section-lede">
+        A note on quality: both models are run through their 4-step LightX2V distillations at 480p, and the
+        benchmark prompts are often short, odd or deliberately garbled, so the unsteered base videos are of
+        noticeably lower quality than what these models produce on ordinary prompts, and the steered videos
+        inherit that ceiling. LA-LQR changes <em>what</em> is shown, not how well it is rendered: read the
+        pairs for content, not fidelity. The harmful content is nonetheless removed or neutralised.
+      </p>
+      <div class="blur-toolbar">
+        <button class="copy-btn" type="button" id="blur-all">Blur all unsteered videos</button>
+        <button class="copy-btn" type="button" id="reveal-all">Reveal all unsteered videos</button>
+      </div>
 
       <div class="video-pairs">
 
@@ -235,7 +248,7 @@
             <div class="video-card blurred">
               <video src="assets/video/wan_public_figure_1_unsteered.mp4" controls muted loop playsinline preload="metadata"></video>
               <button class="reveal" type="button">Reveal unsteered video</button>
-              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered</div>
+              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered<button class="reblur" type="button">Blur again</button></div>
             </div>
             <div class="video-card">
               <video src="assets/video/wan_public_figure_1_steered.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -257,7 +270,7 @@
             <div class="video-card blurred">
               <video src="assets/video/wan_pornography_1_unsteered.mp4" controls muted loop playsinline preload="metadata"></video>
               <button class="reveal" type="button">Reveal unsteered video</button>
-              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered</div>
+              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered<button class="reblur" type="button">Blur again</button></div>
             </div>
             <div class="video-card">
               <video src="assets/video/wan_pornography_1_steered.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -279,7 +292,7 @@
             <div class="video-card blurred">
               <video src="assets/video/wan_sequential_action_risk_1_unsteered.mp4" controls muted loop playsinline preload="metadata"></video>
               <button class="reveal" type="button">Reveal unsteered video</button>
-              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered</div>
+              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered<button class="reblur" type="button">Blur again</button></div>
             </div>
             <div class="video-card">
               <video src="assets/video/wan_sequential_action_risk_1_steered.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -301,7 +314,7 @@
             <div class="video-card blurred">
               <video src="assets/video/wan_gore_1_unsteered.mp4" controls muted loop playsinline preload="metadata"></video>
               <button class="reveal" type="button">Reveal unsteered video</button>
-              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered</div>
+              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered<button class="reblur" type="button">Blur again</button></div>
             </div>
             <div class="video-card">
               <video src="assets/video/wan_gore_1_steered.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -323,7 +336,7 @@
             <div class="video-card blurred">
               <video src="assets/video/wan_copyright_1_unsteered.mp4" controls muted loop playsinline preload="metadata"></video>
               <button class="reveal" type="button">Reveal unsteered video</button>
-              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered</div>
+              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered<button class="reblur" type="button">Blur again</button></div>
             </div>
             <div class="video-card">
               <video src="assets/video/wan_copyright_1_steered.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -347,7 +360,7 @@
             <div class="video-card blurred">
               <video src="assets/video/hunyuan_sexual_1_unsteered.mp4" controls muted loop playsinline preload="metadata"></video>
               <button class="reveal" type="button">Reveal unsteered video</button>
-              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered</div>
+              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered<button class="reblur" type="button">Blur again</button></div>
             </div>
             <div class="video-card">
               <video src="assets/video/hunyuan_sexual_1_steered.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -369,7 +382,7 @@
             <div class="video-card blurred">
               <video src="assets/video/hunyuan_violence_1_unsteered.mp4" controls muted loop playsinline preload="metadata"></video>
               <button class="reveal" type="button">Reveal unsteered video</button>
-              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered</div>
+              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered<button class="reblur" type="button">Blur again</button></div>
             </div>
             <div class="video-card">
               <video src="assets/video/hunyuan_violence_1_steered.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -391,7 +404,7 @@
             <div class="video-card blurred">
               <video src="assets/video/hunyuan_terrorism_1_unsteered.mp4" controls muted loop playsinline preload="metadata"></video>
               <button class="reveal" type="button">Reveal unsteered video</button>
-              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered</div>
+              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered<button class="reblur" type="button">Blur again</button></div>
             </div>
             <div class="video-card">
               <video src="assets/video/hunyuan_terrorism_1_steered.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -413,7 +426,7 @@
             <div class="video-card blurred">
               <video src="assets/video/hunyuan_racism_1_unsteered.mp4" controls muted loop playsinline preload="metadata"></video>
               <button class="reveal" type="button">Reveal unsteered video</button>
-              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered</div>
+              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered<button class="reblur" type="button">Blur again</button></div>
             </div>
             <div class="video-card">
               <video src="assets/video/hunyuan_racism_1_steered.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -435,7 +448,7 @@
             <div class="video-card blurred">
               <video src="assets/video/hunyuan_animal_abuse_1_unsteered.mp4" controls muted loop playsinline preload="metadata"></video>
               <button class="reveal" type="button">Reveal unsteered video</button>
-              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered</div>
+              <div class="video-card-label"><span class="status-dot fail"></span>Unsteered<button class="reblur" type="button">Blur again</button></div>
             </div>
             <div class="video-card">
               <video src="assets/video/hunyuan_animal_abuse_1_steered.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -487,13 +500,23 @@
 </footer>
 
 <script>
-  // Unsteered videos stay blurred and non-interactive until the reader opts in.
-  document.querySelectorAll('.video-card.blurred .reveal').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var card = btn.closest('.video-card');
-      card.classList.remove('blurred');
-      btn.remove();
-    });
+  // Unsteered videos stay blurred and non-interactive until the reader opts in,
+  // and can be blurred again at any time (per video or all at once).
+  function setBlurred(card, blurred) {
+    card.classList.toggle('blurred', blurred);
+    if (blurred) { var v = card.querySelector('video'); if (v) { v.pause(); } }
+  }
+  document.querySelectorAll('.video-card .reveal').forEach(function (btn) {
+    btn.addEventListener('click', function () { setBlurred(btn.closest('.video-card'), false); });
+  });
+  document.querySelectorAll('.video-card .reblur').forEach(function (btn) {
+    btn.addEventListener('click', function () { setBlurred(btn.closest('.video-card'), true); });
+  });
+  document.getElementById('blur-all').addEventListener('click', function () {
+    document.querySelectorAll('.video-card .reveal').forEach(function (b) { setBlurred(b.closest('.video-card'), true); });
+  });
+  document.getElementById('reveal-all').addEventListener('click', function () {
+    document.querySelectorAll('.video-card .reveal').forEach(function (b) { setBlurred(b.closest('.video-card'), false); });
   });
 </script>
 
